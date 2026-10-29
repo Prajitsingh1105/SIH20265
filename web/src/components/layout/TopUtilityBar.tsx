@@ -8,10 +8,10 @@ export const TopUtilityBar: React.FC = () => {
   const { textSize, setTextSize, highContrast, toggleHighContrast } = useAccessibility();
 
   return (
-    <div className="bg-gov-navy-900 text-gray-200 text-xs py-1 px-4 border-b border-gov-navy-800">
-      <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+    <div className="bg-gov-navy-900 text-gray-200 text-xs py-1 px-2.5 sm:px-4 border-b border-gov-navy-800">
+      <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-1.5 sm:gap-2">
         {/* Left Accessibility Links */}
-        <div className="flex items-center space-x-4">
+        <div className="hidden sm:flex items-center space-x-4">
           <a
             href="#main-content"
             className="hover:text-white transition focus:outline-none focus:ring-1 focus:ring-amber-400 px-1"
@@ -26,7 +26,7 @@ export const TopUtilityBar: React.FC = () => {
         </div>
 
         {/* Right Accessibility & Language Controls */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-between sm:justify-end">
           {/* Text Size Controls */}
           <div className="flex items-center space-x-1 bg-gov-navy-800 px-1.5 py-0.5 rounded border border-gov-navy-700">
             <span className="text-gray-400 text-[11px] mr-1">{t('text.size')}:</span>

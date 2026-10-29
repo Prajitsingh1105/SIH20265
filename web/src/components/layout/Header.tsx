@@ -3,10 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useDemo } from '../../context/DemoContext';
-import { Bell, LogOut, Shield, User as UserIcon, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Bell, LogOut, Shield, User as UserIcon, CheckCircle2, AlertTriangle, Menu, X } from 'lucide-react';
 import { api } from '../../services/api';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  isMobileMenuOpen?: boolean;
+  onToggleMobileMenu?: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, onToggleMobileMenu }) => {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
   const { setIsGuideOpen } = useDemo();
@@ -49,30 +54,49 @@ export const Header: React.FC = () => {
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-        {/* Left: Branding & National Emblem Placeholder */}
-        <Link to="/" className="flex items-center space-x-3 group">
-          {/* Neutral Government Shield Emblem Placeholder */}
-          <div className="w-12 h-12 bg-gov-navy-900 rounded-lg flex items-center justify-center text-amber-400 shadow-sm border border-gov-navy-800">
-            <Shield className="w-7 h-7 text-amber-400" />
-          </div>
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="text-xl font-extrabold text-gov-navy-900 tracking-tight">
-                {t('portal.title')}
-              </span>
-              <span className="text-[10px] font-semibold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded border border-amber-300">
-                AICTE
-              </span>
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between">
+        {/* Left: Mobile Menu Toggle & Branding */}
+        <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Mobile Navigation Toggle Button */}
+          {user && (
+            <button
+              type="button"
+              onClick={onToggleMobileMenu}
+              className="p-1.5 -ml-1 text-gov-navy-900 hover:bg-gray-100 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              title="Toggle Menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-gov-navy-900" />
+              ) : (
+                <Menu className="w-6 h-6 text-gov-navy-900" />
+              )}
+            </button>
+          )}
+
+          <Link to="/" className="flex items-center space-x-2.5 sm:space-x-3 group">
+            {/* Neutral Government Shield Emblem Placeholder */}
+            <div className="w-9 h-9 sm:w-11 sm:h-11 bg-gov-navy-900 rounded-lg flex items-center justify-center text-amber-400 shadow-sm border border-gov-navy-800 shrink-0">
+              <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
             </div>
-            <p className="text-xs font-medium text-gray-700">
-              {t('portal.subtitle')}
-            </p>
-            <p className="text-[11px] text-gray-500 hidden sm:block">
-              {t('portal.org')}
-            </p>
-          </div>
-        </Link>
+            <div>
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
+                <span className="text-base sm:text-xl font-extrabold text-gov-navy-900 tracking-tight">
+                  {t('portal.title')}
+                </span>
+                <span className="text-[9px] sm:text-[10px] font-semibold bg-amber-100 text-amber-800 px-1 sm:px-1.5 py-0.5 rounded border border-amber-300">
+                  AICTE
+                </span>
+              </div>
+              <p className="text-[10px] sm:text-xs font-medium text-gray-700 truncate max-w-[150px] xs:max-w-[200px] sm:max-w-none">
+                {t('portal.subtitle')}
+              </p>
+              <p className="text-[11px] text-gray-500 hidden md:block">
+                {t('portal.org')}
+              </p>
+            </div>
+          </Link>
+        </div>
 
         {/* Right: Actions, Notifications & User Account */}
         <div className="flex items-center space-x-3">
