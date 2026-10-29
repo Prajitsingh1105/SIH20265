@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* High Contrast Mode CSS Overrides */
+html.high-contrast {
+  filter: contrast(135%);
+}
+
+html.high-contrast body {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+html.high-contrast .bg-white {
+  background-color: #0d0d0d !important;
+  color: #FFFFFF !important;
+  border-color: #555555 !important;
+}
+
+html.high-contrast .text-gray-900,
+html.high-contrast .text-gray-800,
+html.high-contrast .text-gray-700 {
+  color: #FFFFFF !important;
+}
+
+html.high-contrast .text-gray-500,
+html.high-contrast .text-gray-600 {
+  color: #CCCCCC !important;
+}
+
+html.high-contrast table thead {
+  background-color: #000000 !important;
+  border-color: #FFFFFF !important;
+}
+
+html.high-contrast button {
+  border-width: 2px !important;
+}
+
+/* Print Stylesheet for Official Sanction Orders */
+@media print {
+  header, aside, footer, button, .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+}

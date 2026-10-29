@@ -1,0 +1,36 @@
+================================================================================
+                    STATE BANK OF INDIA
+         PARLIAMENT STREET BRANCH, NEW DELHI - 110001
+              TERM DEPOSIT RECEIPT / FDR ADVICE
+================================================================================
+
+Receipt No. / FDR No.   : FDR-SBI-2024-8842
+Date of Issue           : 15/07/2024
+Customer ID             : CIF-90812450
+Deposit Account No.     : 39485720194
+
+DEPOSITOR INFORMATION:
+Name of Institution     : SUNRISE INSTITUTE OF TECHNOLOGY
+Address                 : Plot 42, Hinjewadi Phase 1, Pune, Maharashtra - 411057
+AISHE Code              : C-1001
+
+DEPOSIT DETAILS:
+Principal Amount (INR)  : Rs. 15,00,000.00
+Amount in Words         : Rupees Fifteen Lakh Only
+Period of Deposit       : 36 Months
+Date of Maturity        : 15/07/2027
+Interest Rate           : 7.25% p.a. (Compounded Quarterly)
+Maturity Value (INR)    : Rs. 18,59,620.00
+
+SPECIAL CONDITIONS / LIEN ENDORSEMENT:
+IRREVOCABLE LIEN MARKED IN FAVOUR OF:
+"Member Secretary, All India Council for Technical Education (AICTE), New Delhi"
+Towards security deposit compliance for technical education institution approval.
+
+No premature withdrawal, loan against deposit, or transfer permitted without 
+prior written discharge from the Competent Authority, AICTE, New Delhi.
+
+                                                 For STATE BANK OF INDIA
+                                                 Sd/- Chief Manager
+                                                 Branch Seal & Date Stamp
+================================================================================
