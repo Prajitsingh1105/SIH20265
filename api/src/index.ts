@@ -33,7 +33,19 @@ app.use(
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000', ENV.FRONTEND_URL],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (
+        origin.includes('localhost') ||
+        origin.includes('vercel.app') ||
+        origin.includes('trycloudflare.com') ||
+        origin.includes('onrender.com') ||
+        origin === ENV.FRONTEND_URL
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, true); // Allow all origins for seamless demo
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
