@@ -77,7 +77,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isMobileOpen, onCloseMobile })
       to: '/admin',
       label: t('nav.admin'),
       icon: Sliders,
-      roles: ['SYSTEM_ADMIN'],
+      roles: ['SCRUTINY_OFFICER', 'SYSTEM_ADMIN'],
     },
   ];
 

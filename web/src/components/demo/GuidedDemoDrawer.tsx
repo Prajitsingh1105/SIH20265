@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDemo } from '../../context/DemoContext';
 import { useAuth } from '../../context/AuthContext';
-import { X, CheckCircle, ArrowRight, UserCheck, RotateCcw } from 'lucide-react';
+import { X, CheckCircle, ArrowRight, UserCheck, RotateCcw, Clock, FastForward } from 'lucide-react';
 
 export const GuidedDemoDrawer: React.FC = () => {
-  const { isGuideOpen, setIsGuideOpen, demoSteps, completeStep, resetDemoData } = useDemo();
+  const {
+    isGuideOpen,
+    setIsGuideOpen,
+    demoSteps,
+    completeStep,
+    resetDemoData,
+    shiftClock,
+    resetClock,
+    isShifted,
+    offsetDays,
+    simulatedDate,
+  } = useDemo();
   const { demoLogin, user } = useAuth();
   const navigate = useNavigate();
+  const [clockLoading, setClockLoading] = useState(false);
+
+  const handleTimeTravel = async (days: number) => {
+    setClockLoading(true);
+    try {
+      await shiftClock(days);
+      completeStep(7); // Mark step 7 complete
+      alert(`Demo Clock advanced by +${days} days! Automated lifecycle scan executed.`);
+    } catch (e: any) {
+      alert(e.message || 'Failed to advance clock');
+    } finally {
+      setClockLoading(false);
+    }
+  };
 
   if (!isGuideOpen) {
     return (
@@ -72,6 +97,62 @@ export const GuidedDemoDrawer: React.FC = () => {
           <RotateCcw className="w-3 h-3" />
           <span>Reset Demo</span>
         </button>
+      </div>
+
+      {/* Time Travel Demo Clock Quick Controller */}
+      <div className="bg-gov-navy-950 text-white px-4 py-3 border-b border-gov-navy-800 space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-1.5 text-xs font-bold text-amber-400">
+            <Clock className="w-4 h-4 text-amber-400 animate-pulse" />
+            <span className="uppercase tracking-wider">Demo Time Travel Clock</span>
+          </div>
+          <span className="text-[11px] font-mono text-gray-300">
+            {isShifted ? (
+              <span className="text-amber-300 font-bold bg-amber-400/20 px-2 py-0.5 rounded border border-amber-400/40">
+                +{offsetDays}d Active
+              </span>
+            ) : (
+              <span className="text-gray-400">Real Time</span>
+            )}
+          </span>
+        </div>
+
+        <p className="text-[11px] text-gray-300 leading-snug">
+          Jump forward in time to trigger 90/60/30/7-day maturity reminders, overdue alerts, and escalations across all FDRs:
+        </p>
+
+        <div className="flex items-center gap-2 pt-1">
+          <button
+            onClick={() => handleTimeTravel(30)}
+            disabled={clockLoading}
+            className="flex-1 py-1.5 px-2 bg-gov-navy-800 hover:bg-gov-navy-700 text-amber-400 border border-gov-navy-600 rounded text-xs font-bold transition flex items-center justify-center space-x-1"
+          >
+            <FastForward className="w-3 h-3" />
+            <span>+30 Days</span>
+          </button>
+
+          <button
+            onClick={() => handleTimeTravel(60)}
+            disabled={clockLoading}
+            className="flex-1 py-1.5 px-2 bg-amber-500 hover:bg-amber-400 text-gov-navy-950 rounded text-xs font-black transition flex items-center justify-center space-x-1 shadow-sm"
+          >
+            <FastForward className="w-3 h-3" />
+            <span>+60 Days</span>
+          </button>
+
+          {isShifted && (
+            <button
+              onClick={async () => {
+                await resetClock();
+                alert('Clock reset to real time.');
+              }}
+              className="py-1.5 px-2.5 bg-rose-900/60 hover:bg-rose-900 text-rose-200 border border-rose-700 rounded text-xs font-medium transition"
+              title="Reset back to current date"
+            >
+              Reset
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Steps List */}

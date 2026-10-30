@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useDemo } from '../../context/DemoContext';
-import { Bell, LogOut, Shield, User as UserIcon, CheckCircle2, AlertTriangle, Menu, X } from 'lucide-react';
+import { Bell, LogOut, Shield, User as UserIcon, CheckCircle2, AlertTriangle, Menu, X, Clock } from 'lucide-react';
 import { api } from '../../services/api';
 
 interface HeaderProps {
@@ -99,7 +99,17 @@ export const Header: React.FC<HeaderProps> = ({ isMobileMenuOpen, onToggleMobile
         </div>
 
         {/* Right: Actions, Notifications & User Account */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Quick Demo Time Travel button */}
+          <button
+            onClick={() => setIsGuideOpen(true)}
+            className="hidden lg:flex items-center space-x-1.5 px-2.5 py-1.5 bg-gov-navy-900 hover:bg-gov-navy-800 text-amber-400 font-bold text-xs rounded-md shadow-xs transition border border-gov-navy-700"
+            title="Time Travel Demo Clock"
+          >
+            <Clock className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+            <span>Time Travel Clock</span>
+          </button>
+
           {/* Floating Demo Guide Pill Trigger */}
           <button
             onClick={() => setIsGuideOpen(true)}
